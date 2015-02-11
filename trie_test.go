@@ -11,6 +11,9 @@ func TestTrie0(t *testing.T) {
 	trie.Insert("123")
 	trie.Insert("abc")
 	trie.Insert("hello")
+	if err := trie.Insert("hello2", "1", "2"); err == nil {
+		t.Fatal("failed")
+	}
 	results := trie.Find("123 abc hello")
 	if len(results) != 3 {
 		t.Fatalf("len(%d) != 3", len(results))

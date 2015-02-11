@@ -1,7 +1,7 @@
 package igo
 
 import (
-	//"errors"
+	"errors"
 	"fmt"
 )
 
@@ -30,10 +30,10 @@ func (t *Trie) Size() int {
 	return t.size
 }
 
-func (t *Trie) Insert(word string, data ...interface{}) {
+func (t *Trie) Insert(word string, data ...interface{}) error {
 	node := t.root
 	if len(data) >= 2 {
-		panic("args illegal")
+		return errors.New("args illegal")
 	}
 	for _, b := range []byte(word) {
 		if node.next[b] == nil {
@@ -50,6 +50,7 @@ func (t *Trie) Insert(word string, data ...interface{}) {
 		node.data = true
 	}
 	t.size++
+	return nil
 }
 
 func (t *Trie) Find(text string) []*TrieMatchItem {
